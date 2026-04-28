@@ -3,7 +3,7 @@ frontend:
   phases:
     preBuild:
       commands:
-        - cd vite-reactjs && npm ci
+        - cd vite-reactjs && npm install
     build:
       commands:
         - cd vite-reactjs && npm run build
