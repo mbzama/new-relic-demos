@@ -3,17 +3,17 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm install
+        - cd vite-reactjs && npm install
     build:
       commands:
-        - npm run build
+        - cd vite-reactjs && npm run build
   artifacts:
-    baseDirectory: dist
+    baseDirectory: vite-reactjs/dist
     files:
       - '**/*'
   cache:
     paths:
-      - node_modules/**/*
+      - vite-reactjs/node_modules/**/*
   customHeaders:
     - pattern: '**/*'
       headers:
