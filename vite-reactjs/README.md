@@ -11,6 +11,26 @@ Currently, two official plugins are available:
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
+## Environment Variables
+
+This project requires the following environment variables for the New Relic Browser Agent. Create a `.env.local` file in the project root:
+
+```
+VITE_NEW_RELIC_APP_ID=your_app_id
+VITE_NEW_RELIC_LICENSE_KEY=your_license_key
+VITE_NEW_RELIC_ACCOUNT_ID=your_account_id
+VITE_NEW_RELIC_AGENT_ID=your_agent_id
+VITE_NEW_RELIC_TRUST_KEY=your_trust_key
+```
+
+| Variable | Where to find it |
+|---|---|
+| `VITE_NEW_RELIC_APP_ID` | New Relic > Browser > (your app) > Application settings |
+| `VITE_NEW_RELIC_LICENSE_KEY` | New Relic > Browser > (your app) > Application settings |
+| `VITE_NEW_RELIC_ACCOUNT_ID` | New Relic > (account dropdown) > Account settings |
+| `VITE_NEW_RELIC_AGENT_ID` | New Relic > Browser > (your app) > Application settings |
+| `VITE_NEW_RELIC_TRUST_KEY` | New Relic > (account dropdown) > Account settings |
+
 ## Environment Variables in AWS Amplify
 
 To add environment variables to your Amplify deployment:
