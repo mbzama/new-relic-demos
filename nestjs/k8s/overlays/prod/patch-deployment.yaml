@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nestjs-newrelic-demo
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: api
+          resources:
+            requests:
+              memory: '256Mi'
+              cpu: '200m'
+            limits:
+              memory: '512Mi'
+              cpu: '1000m'
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: NEW_RELIC_APP_NAME
+              value: NestJS-Demo-Prod
+            - name: NEW_RELIC_LOG_LEVEL
+              value: warn

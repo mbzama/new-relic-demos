@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nestjs-newrelic-demo
+  labels:
+    app: nestjs-newrelic-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nestjs-newrelic-demo
+  template:
+    metadata:
+      labels:
+        app: nestjs-newrelic-demo
+      annotations:
+        # Enables New Relic Kubernetes integration metrics
+        newrelic.io/scrape: 'true'
+    spec:
+      containers:
+        - name: api
+          image: YOUR_ECR_REPO/nestjs-newrelic-demo:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              value: '3000'
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: newrelic-secret
+                  key: license-key
+            - name: NEW_RELIC_METADATA_KUBERNETES_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: NEW_RELIC_METADATA_KUBERNETES_NAMESPACE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: NEW_RELIC_METADATA_KUBERNETES_DEPLOYMENT_NAME
+              value: nestjs-newrelic-demo
+            - name: NEW_RELIC_METADATA_KUBERNETES_CLUSTER_NAME
+              value: your-eks-cluster-name
+            - name: NEW_RELIC_METADATA_KUBERNETES_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NEW_RELIC_METADATA_KUBERNETES_CONTAINER_NAME
+              value: api
+          resources:
+            requests:
+              memory: '128Mi'
+              cpu: '100m'
+            limits:
+              memory: '256Mi'
+              cpu: '500m'
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10

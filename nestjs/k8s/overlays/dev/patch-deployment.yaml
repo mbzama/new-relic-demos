@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nestjs-newrelic-demo
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: api
+          env:
+            - name: NODE_ENV
+              value: development
+            - name: NEW_RELIC_APP_NAME
+              value: NestJS-Demo-Dev
+            - name: NEW_RELIC_LOG_LEVEL
+              value: info

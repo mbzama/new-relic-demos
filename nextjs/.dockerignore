@@ -1,0 +1,39 @@
+# Dependencies — reinstalled inside image
+node_modules/
+
+# Next.js build cache — rebuilt inside image
+.next/
+out/
+
+# Environment secrets — injected at runtime via env vars or k8s secrets
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+newrelic_agent.log
+
+# Test & coverage
+coverage/
+
+# Dev tooling
+.vscode/
+.idea/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docs
+*.md
+README*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp / screenshots
+tmp/
+temp/

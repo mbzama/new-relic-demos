@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - NEW_RELIC_APP_NAME=${NEW_RELIC_APP_NAME:-NestJS-NewRelic-Demo-Local}
+      - NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY}
+      - NEW_RELIC_LOG_LEVEL=${NEW_RELIC_LOG_LEVEL:-info}
+    volumes:
+      - ./newrelic.js:/app/newrelic.js:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:3000/api/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3

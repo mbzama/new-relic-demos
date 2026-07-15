@@ -1,0 +1,44 @@
+# Dependencies — reinstalled inside image
+node_modules/
+
+# Build artifacts — rebuilt inside image
+dist/
+build/
+
+# Environment secrets — injected at runtime via env vars or k8s secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# Logs
+logs/
+*.log
+newrelic_agent.log
+
+# Test & coverage
+coverage/
+test/
+**/*.spec.ts
+**/*.e2e-spec.ts
+
+# Dev tooling — not needed in image
+.vscode/
+.idea/
+scripts/
+
+# Git
+.git/
+.gitignore
+
+# Docs
+*.md
+README*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+tmp/
+temp/
